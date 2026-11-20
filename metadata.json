@@ -1,0 +1,6 @@
+{
+  "name": "Swar Education Duty Registry",
+  "description": "UDISE-based school staff election and census duty data collection portal powered by Google Sheets and Google Apps Script.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
