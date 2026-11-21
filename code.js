@@ -338,8 +338,8 @@ function saveOrUpdateDataRecord_(record, action, requestedRowIndex) {
     boothNumber: record.electionDuty === 'नहीं' ? '' : String(record.boothNumber || '').toUpperCase().replace(/[^A-Z0-9\s/-]/g, '').trim(),
     censusDuty: String(record.censusDuty || '').trim(),
     censusArea: record.censusDuty === 'नहीं' ? '' : String(record.censusArea || '').trim(),
-    ebCircleNumber: record.censusDuty === 'नहीं' ? '' : String(record.ebCircleNumber || '').replace(/[^0-9]/g, ''),
-    censusWithElection: String(record.censusWithElection || '').trim(),
+    ebCircleNumber: record.censusDuty === 'नहीं' ? '' : String(record.ebCircleNumber || '').replace(/[^0-9,\s]/g, '').trim(),
+    censusWithElection: record.censusDuty === 'नहीं' ? '' : String(record.censusWithElection || '').trim(),
     timestamp: Utilities.formatDate(new Date(), 'Asia/Kolkata', 'dd/MM/yyyy HH:mm:ss')
   };
 

@@ -133,8 +133,11 @@ export async function submitOrUpdateDutyRecord(
       assemblyName: record.electionDuty === 'नहीं' ? '' : record.assemblyName,
       boothNumber: record.electionDuty === 'नहीं' ? '' : record.boothNumber.toUpperCase().trim(),
       censusArea: record.censusDuty === 'नहीं' ? '' : record.censusArea,
-      ebCircleNumber: record.censusDuty === 'नहीं' ? '' : record.ebCircleNumber.replace(/[^0-9]/g, ''),
-      censusWithElection: record.censusWithElection,
+      ebCircleNumber:
+        record.censusDuty === 'नहीं'
+          ? ''
+          : record.ebCircleNumber.replace(/[^0-9,\s]/g, '').trim(),
+      censusWithElection: record.censusDuty === 'नहीं' ? '' : record.censusWithElection,
       timestamp,
     };
 

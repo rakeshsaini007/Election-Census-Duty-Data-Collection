@@ -135,6 +135,22 @@ export const DutyEntryForm: React.FC<DutyEntryFormProps> = ({
     }
   };
 
+  const handleCommaSeparatedNumericInput = (rawValue: string) => {
+    const hasInvalidChar = /[^0-9,\s]/.test(rawValue);
+    const cleaned = rawValue.replace(/[^0-9,\s]/g, '');
+
+    if (hasInvalidChar) {
+      setWarning(
+        'ebCircleNumber',
+        'Only numerical digits (0-9) and commas (",") are allowed.'
+      );
+    } else {
+      clearWarning('ebCircleNumber');
+    }
+
+    onChangeForm((prev) => ({ ...prev, ebCircleNumber: cleaned }));
+  };
+
   const showElectionFields = form.electionDuty === 'हाँ';
   const showCensusFields = form.censusDuty === 'प्रगणक' || form.censusDuty === 'सुपरवाइज़र';
 
@@ -591,16 +607,16 @@ export const DutyEntryForm: React.FC<DutyEntryFormProps> = ({
 
             <div>
               <label htmlFor="eb-circle-number" className="block text-xs font-medium text-slate-700">
-                ईबी नंबर/ सर्कल नंबर (Numerical) <span className="text-red-600">*</span>
+                ईबी नंबर/ सर्कल नंबर (Numerical, comma &quot;,&quot; for multiple) <span className="text-red-600">*</span>
               </label>
               <input
                 id="eb-circle-number"
                 type="text"
-                inputMode="numeric"
+                inputMode="text"
                 required={showCensusFields}
                 value={form.ebCircleNumber}
-                onChange={(e) => handleNumericOnlyInput('ebCircleNumber', e.target.value)}
-                placeholder="E.G. 104"
+                onChange={(e) => handleCommaSeparatedNumericInput(e.target.value)}
+                placeholder="E.G. 104, 105"
                 className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm tabular-nums text-slate-900 focus:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700/15"
               />
               {fieldWarnings.ebCircleNumber && (

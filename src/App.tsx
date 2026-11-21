@@ -198,8 +198,8 @@ export default function App() {
       if (!form.censusArea) {
         return 'Please select जनगणना क्षेत्र.';
       }
-      if (!/^\d+$/.test(form.ebCircleNumber.trim())) {
-        return 'ईबी नंबर/ सर्कल नंबर must be numerical only.';
+      if (!/^\d+(\s*,\s*\d+)*$/.test(form.ebCircleNumber.trim())) {
+        return 'ईबी नंबर/ सर्कल नंबर must contain numerical digits (use comma "," to separate multiple numbers, e.g. 104, 105).';
       }
       if (!form.censusWithElection) {
         return 'Please select निर्वाचन डयूटी के साथ-साथ जनगणना करना चाहते हैं या नहीं.';
