@@ -550,6 +550,7 @@ export const DutyEntryForm: React.FC<DutyEntryFormProps> = ({
                   censusDuty: val,
                   censusArea: val === 'नहीं' ? '' : prev.censusArea,
                   ebCircleNumber: val === 'नहीं' ? '' : prev.ebCircleNumber,
+                  censusWithElection: val === 'नहीं' ? '' : prev.censusWithElection,
                 }));
               }}
               className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700/15"
@@ -562,35 +563,10 @@ export const DutyEntryForm: React.FC<DutyEntryFormProps> = ({
               ))}
             </select>
           </div>
-
-          <div>
-            <label htmlFor="census-with-election" className="block text-xs font-medium text-slate-700">
-              निर्वाचन डयूटी के साथ-साथ जनगणना करना चाहते हैं या नहीं <span className="text-red-600">*</span>
-            </label>
-            <select
-              id="census-with-election"
-              required
-              value={form.censusWithElection}
-              onChange={(e) =>
-                onChangeForm((prev) => ({
-                  ...prev,
-                  censusWithElection: e.target.value as DutyRecord['censusWithElection'],
-                }))
-              }
-              className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700/15"
-            >
-              <option value="">-- Select Option --</option>
-              {YES_NO_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
 
         {showCensusFields && (
-          <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-3">
             <div>
               <label htmlFor="census-area" className="block text-xs font-medium text-slate-700">
                 जनगणना क्षेत्र <span className="text-red-600">*</span>
@@ -630,6 +606,31 @@ export const DutyEntryForm: React.FC<DutyEntryFormProps> = ({
               {fieldWarnings.ebCircleNumber && (
                 <p className="mt-1 text-xs text-amber-700">{fieldWarnings.ebCircleNumber}</p>
               )}
+            </div>
+
+            <div>
+              <label htmlFor="census-with-election" className="block text-xs font-medium text-slate-700">
+                निर्वाचन डयूटी के साथ-साथ जनगणना करना चाहते हैं या नहीं <span className="text-red-600">*</span>
+              </label>
+              <select
+                id="census-with-election"
+                required={showCensusFields}
+                value={form.censusWithElection}
+                onChange={(e) =>
+                  onChangeForm((prev) => ({
+                    ...prev,
+                    censusWithElection: e.target.value as DutyRecord['censusWithElection'],
+                  }))
+                }
+                className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700/15"
+              >
+                <option value="">-- Select Option --</option>
+                {YES_NO_OPTIONS.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         )}
